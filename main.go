@@ -13,6 +13,7 @@ func main() {
 	router.POST("/courses", postCourse)
 	router.GET("/courses/:id", getCourseByID)
 	router.GET("/courses/:teacher", getCourseByTeacher)
+	router.DELETE("/courses/:id", deleteCourse)
 	router.Run("localhost:8080")
 }
 
@@ -98,4 +99,22 @@ func getCourseByTeacher(c *gin.Context) {
 		}
 	}
 	c.IndentedJSON(http.StatusNotFound, gin.H{"message": "teacher not found"})
+}
+
+func deleteCourse(c *gin.Context) {
+	var index = 0
+	var id = c.Param("ID")
+	for _, s := range courses {
+
+		if s.ID == id {
+			courses = RemoveCourse(courses, index)
+		}
+		index++
+
+	}
+
+}
+
+func RemoveCourse(s []Course, index int) []Course {
+	return append(s[:index], s[index+1:]...)
 }
