@@ -1,0 +1,120 @@
+swagger: "2.0"
+info:
+  description: "Placeholder"
+  version: "1.0.0"
+  title: "Assignment2-Microservice(Teacher)"
+ 
+host: "petstore.swagger.io"
+basePath: "/v2"
+
+tags:
+- name: "Teacher"
+  description: "Everything about a teacher"
+  
+paths:
+  /Teacher:
+    post:
+      tags:
+      - "Teacher"
+      summary: "Enlist a Teacher at ITU"
+      description: ""
+      operationId: "EnlistTeacher"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in : "body"
+        name: "student"
+        description: "Enlist a teacher"
+        required: true
+        schema:
+          $ref: "#/definitions/Teacher"
+      responses:
+        "200":
+          description: "OK"
+    put:
+      tags:
+      - "Teacher"
+      summary: "Update a teacher at ITU"
+      description: ""
+      operationId: "UpdateTeacher"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Pet object that needs to be added to the store"
+        required: false
+        schema:
+          $ref: "#/definitions/Teacher"
+      responses:
+        "200":
+          description: "OK"
+  /Teacher/{id}:
+    get:
+      tags:
+      - "Teacher"
+      summary: "Find teacher by ID"
+      description: "Returns a single teacher"
+      operationId: "getTeacherByID"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of teacher to return"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+    delete:
+      tags:
+      - "Teacher"
+      summary: "Deletes a teacher"
+      description: ""
+      operationId: "deleteTeacher"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Teacher id to delete"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "OK"
+          
+      
+definitions:
+
+  Teacher:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      firstname:
+        type: "string"
+      lastname:
+        type: "string"
+      Email:
+        type: "string"
+      PopularityscoreByAllStudentsAttendingCourse:
+        type: "number"
+        
+
+        
+        
+    
+
+
+
+ 
+  
