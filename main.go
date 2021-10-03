@@ -23,14 +23,15 @@ type Course struct {
 	Title    string  `json:"title"`
 	Teacher  string  `json:"teacher"`
 	Students int     `json:"students"`
+	ETCS     float32 `json:"ETCS"`
 	Rating   float32 `json:"rating"`
 }
 
 // course slice to seed course data.
 var courses = []Course{
-	{ID: "1", Title: "Algo", Teacher: "Thore", Students: 100, Rating: 9.1},
-	{ID: "2", Title: "Code", Teacher: "Teach", Students: 200, Rating: 8.9},
-	{ID: "3", Title: "Design", Teacher: "Anders", Students: 50, Rating: 8},
+	{ID: "1", Title: "Algo", Teacher: "Thore", Students: 100, ETCS: 7.5, Rating: 9.1},
+	{ID: "2", Title: "Code", Teacher: "Teach", Students: 200, ETCS: 7.5, Rating: 8.9},
+	{ID: "3", Title: "Design", Teacher: "Anders", Students: 50, ETCS: 15, Rating: 8},
 }
 
 // getCourses responds with the list of all courses as JSON.
