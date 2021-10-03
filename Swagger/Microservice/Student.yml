@@ -1,0 +1,131 @@
+swagger: "2.0"
+info:
+  description: "Placeholder"
+  version: "1.0.0"
+  title: "Assignment2-Microservice(Student)"
+ 
+host: "petstore.swagger.io"
+basePath: "/v2"
+
+tags:
+- name: "Student"
+  description: "Everything about a student"
+  
+ 
+
+paths:
+  /Student:
+    post:
+      tags:
+      - "Student"
+      summary: "Enlist a Student at ITU"
+      description: ""
+      operationId: "EnlistStudent"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in : "body"
+        name: "student"
+        description: "Enlist a student"
+        required: true
+        schema:
+          $ref: "#/definitions/Student"
+      responses:
+        "200":
+          description: "OK"
+    put:
+      tags:
+      - "Student"
+      summary: "Update a new Student at ITU"
+      description: ""
+      operationId: "UpdateStudent"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Pet object that needs to be added to the store"
+        required: false
+        schema:
+          $ref: "#/definitions/Student"
+      responses:
+        "200":
+          description: "OK"
+  /Student/{id}:
+    get:
+      tags:
+      - "Student"
+      summary: "Find student by ID"
+      description: "Returns a single student"
+      operationId: "getStudentByID"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of student to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+    delete:
+      tags:
+      - "Student"
+      summary: "Deletes a Student"
+      description: ""
+      operationId: "deleteStudent"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Student id to delete"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "OK"
+  
+      
+definitions:
+  Student:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      firstname:
+        type: "string"
+      lastname:
+        type: "string"
+      Email:
+        type: "string"
+      SatificationRating:
+        type: "number"
+        minimum: 1
+        maximum: 5 
+      TeacherRating:
+        type: "number"
+        minimum: 1
+        maximum: 5
+      CoursesAttending:
+        type: "object"
+      
+ 
+        
+        
+    
+
+
+
+ 
+  
