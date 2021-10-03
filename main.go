@@ -2,7 +2,6 @@ package main
 
 import (
 	"net/http"
-	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -12,8 +11,9 @@ func main() {
 	router.GET("/courses", getCourses)
 	router.POST("/courses", postCourse)
 	router.GET("/courses/:id", getCourseByID)
-	router.GET("/courses/:teacher", getCourseByTeacher)
 	router.DELETE("/courses/:id", deleteCourse)
+	router.PUT("/courses/:id", UpdateCourse)
+
 	router.Run("localhost:8080")
 }
 
@@ -32,6 +32,7 @@ var courses = []Course{
 	{ID: "1", Title: "Algo", Teacher: "Thore", Students: 100, ETCS: 7.5, Rating: 9.1},
 	{ID: "2", Title: "Code", Teacher: "Teach", Students: 200, ETCS: 7.5, Rating: 8.9},
 	{ID: "3", Title: "Design", Teacher: "Anders", Students: 50, ETCS: 15, Rating: 8},
+	//{"id": "4", "title": "Kattis", "teacher": "null", "students": 1000, "etcs": 0.0, "rating": 10.0},
 }
 
 // getCourses responds with the list of all courses as JSON.
@@ -39,7 +40,7 @@ func getCourses(c *gin.Context) {
 	c.IndentedJSON(http.StatusOK, courses)
 }
 
-// postCourses adds course from JSON received in the request body.
+// postCourse adds course from JSON received in the request body.
 func postCourse(c *gin.Context) {
 	var newCourse Course
 
@@ -55,18 +56,13 @@ func postCourse(c *gin.Context) {
 }
 
 //update student count from id
-func UpdateStudents(c *gin.Context) {
+func UpdateCourse(c *gin.Context) {
+	var updatedCourse Course
 	id := c.Param("id")
-	strcount := c.Param("students")
-	count, err := strconv.Atoi(strcount)
-	if count < 0 || err == nil {
-		c.IndentedJSON(http.StatusNotFound, gin.H{"message": "course not found"})
-		return
-	}
-
-	for _, a := range courses {
-		if a.ID == id {
-			a.Students = count
+	for i := 0; i < len(courses); i++ {
+		if courses[i].ID == id {
+			c.BindJSON(&updatedCourse)
+			courses[i] = updatedCourse
 			return
 		}
 	}
@@ -88,7 +84,8 @@ func getCourseByID(c *gin.Context) {
 	}
 	c.IndentedJSON(http.StatusNotFound, gin.H{"message": "course not found"})
 }
-func getCourseByTeacher(c *gin.Context) {
+
+/* func getCourseByTeacher(c *gin.Context) {
 	teacher := c.Param("teacher")
 
 	// Loop over the list of courses, looking for
@@ -100,11 +97,11 @@ func getCourseByTeacher(c *gin.Context) {
 		}
 	}
 	c.IndentedJSON(http.StatusNotFound, gin.H{"message": "teacher not found"})
-}
+} */
 
 func deleteCourse(c *gin.Context) {
 	var index = 0
-	var id = c.Param("ID")
+	var id = c.Param("id")
 	for _, s := range courses {
 
 		if s.ID == id {
